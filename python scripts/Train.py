@@ -20,7 +20,10 @@ class Train:
 
         for j in range(len(self.state)):
             if error[j] < 0:
-                self.state[j] = self.state[j] - sqrt(error[j])
+                if (self.state[j] - sqrt(error[j]) <= 0:
+                    self.state[j] = 0
+                else:
+                    self.state[j] = self.state[j] - sqrt(error[j])
             elif error[j] > 0:
                 self.state[j] = self.state[j] + sqrt(error[j])
             else:

@@ -4,18 +4,26 @@ import Train
 
 #data start
 
-raw_pixels = []
+trainpixels = []
+testpixels = []
 
 #data end
 
 #Read data
 
-with open('C:\\Users\\hacky\\Python\\kaggle\\digit-recognizer\\train.csv', newline='') as csvfile:
-    pixelreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-    for row in pixelreader:
-        raw_pixels.append(row)
+with open('train.csv', newline='') as trainfile:
+    trainreader = csv.reader(trainfile, delimiter=' ', quotechar='|')
+    for row in trainreader:
+        trainpixels.append(row)
 
-#print(raw_pixels[1])
+trainfile.close()
+
+with open('test.csv', newline='') as testfile:
+    testreader = csv.reader(testfile, delimiter=' ', quotechar='|')
+    for row in testreader:
+        testpixels.append(row)
+
+testfile.close()
 
 #End read data
 
@@ -23,13 +31,13 @@ with open('C:\\Users\\hacky\\Python\\kaggle\\digit-recognizer\\train.csv', newli
 
 initial = []
 
-def ensureint(l):
+def ensurefloat(l):
     newl = []
     for i in l:
         try:
-            newi = int(i)
+            newi = float(i)
         except:
-            print("Invalid integer: "+i)
+            print("Invalid float: "+i)
             print("Index of error:"+len(newl)+1)
             break
 
@@ -71,8 +79,8 @@ raw_pixels = raw_pixels[1:] #trimming headers
 
 for i in raw_pixels:
     pixels = i[0].split(",")
-    pixels = ensureint(pixels)
-    ans = int(pixels[0])
+    pixels = ensurefloat(pixels)
+    ans = pixels[0]
     data = pixels[1:]
 
     if ans==0:
@@ -101,4 +109,7 @@ for i in raw_pixels:
 print(zero.reportstate())
 #End training
 
+#Start testing
+
+#End testing
 
