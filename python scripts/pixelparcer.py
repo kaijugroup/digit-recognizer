@@ -1,19 +1,10 @@
 import csv
+import math
+import Train
 
 #data start
 
 raw_pixels = []
-
-zero = []
-one = []
-two = []
-three = []
-four = []
-five = []
-six = []
-seven = []
-eight = []
-nine = []
 
 #data end
 
@@ -30,21 +21,47 @@ with open('C:\\Users\\hacky\\Python\\kaggle\\digit-recognizer\\train.csv', newli
 
 #Setup
 
+initial = []
+
+def ensureint(l):
+    newl = []
+    for i in l:
+        try:
+            newi = int(i)
+        except:
+            print("Invalid integer: "+i)
+            print("Index of error:"+len(newl)+1)
+            break
+
+        newl.append(newi)
+    return(newl)
+
 def initialconditions():
-    for i in range(783):
-        zero.append(128)
-        one.append(128)
-        two.append(128)
-        three.append(128)
-        four.append(128)
-        five.append(128)
-        six.append(128)
-        seven.append(128)
-        eight.append(128)
-        nine.append(128)
+    for i in range(784):
+        initial.append(128)
 
 initialconditions()
-print(len(zero))
+
+zero = Train.Train()
+zero.build(initial)
+one = Train.Train()
+one.build(initial)
+two = Train.Train()
+two.build(initial)
+three = Train.Train()
+three.build(initial)
+four = Train.Train()
+four.build(initial)
+five = Train.Train()
+five.build(initial)
+six = Train.Train()
+six.build(initial)
+seven = Train.Train()
+seven.build(initial)
+eight = Train.Train()
+eight.build(initial)
+nine = Train.Train()
+nine.build(initial)
 
 #End setup
 
@@ -52,19 +69,36 @@ print(len(zero))
 
 raw_pixels = raw_pixels[1:] #trimming headers
 
-for pixel in raw_pixels:
-    initlist = pixel[0]
-    listdata = list(initlist.split(","))
-    for i in range(len(listdata)):
-        listdata[i] = int(listdata[i])
-    #print(listdata)
-    training(listdata[1:],listdata[0])
+for i in raw_pixels:
+    pixels = i[0].split(",")
+    pixels = ensureint(pixels)
+    ans = int(pixels[0])
+    data = pixels[1:]
 
-print(one)
-print(two)
-print(three)
-print(four)
-print(five)
+    if ans==0:
+        zero.train(data)
+    elif ans==1:
+        one.train(data)
+    elif ans==2:
+        two.train(data)
+    elif ans==3:
+        three.train(data)
+    elif ans==4:
+        four.train(data)
+    elif ans==5:
+        five.train(data)
+    elif ans==6:
+        six.train(data)
+    elif ans==7:
+        seven.train(data)
+    elif ans==8:
+        eight.train(data)
+    elif ans==9:
+        nine.train(data)
+    else:
+        print("Invalid data detected: "+ans)
+
+print(zero.reportstate())
 #End training
 
 
