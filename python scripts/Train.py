@@ -1,4 +1,4 @@
-
+import math
 
 class Train:
     def __init__(self):
@@ -13,19 +13,18 @@ class Train:
             print("Warning, possible mismatch of data length: State=", len(self.state), " Data=", len(data))
 
         error = []
-        for i in range(len(self.data)):
+        for i in range(len(data)):
              err = self.state[i] - data[i]
              error.append(err)
-        print(error)
 
         for j in range(len(self.state)):
             if error[j] < 0:
-                if (self.state[j] - sqrt(error[j]) <= 0:
+                if (self.state[j] - math.sqrt(abs(error[j]))) <= 0:
                     self.state[j] = 0
                 else:
-                    self.state[j] = self.state[j] - sqrt(error[j])
+                    self.state[j] = self.state[j] - math.sqrt(abs(error[j]))
             elif error[j] > 0:
-                self.state[j] = self.state[j] + sqrt(error[j])
+                self.state[j] = self.state[j] + math.sqrt(abs(error[j]))
             else:
                 next
 

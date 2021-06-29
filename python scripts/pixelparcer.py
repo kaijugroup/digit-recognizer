@@ -74,10 +74,10 @@ nine.build(initial)
 #End setup
 
 #Training
+"""
+trainpixels = trainpixels[1:] #trimming headers
 
-raw_pixels = raw_pixels[1:] #trimming headers
-
-for i in raw_pixels:
+for i in trainpixels:
     pixels = i[0].split(",")
     pixels = ensurefloat(pixels)
     ans = pixels[0]
@@ -105,8 +105,8 @@ for i in raw_pixels:
         nine.train(data)
     else:
         print("Invalid data detected: "+ans)
+"""
 
-print(zero.reportstate())
 #End training
 
 #Start testing
